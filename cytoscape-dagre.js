@@ -248,9 +248,11 @@ DagreLayout.prototype.run = function () {
   var gNodeIds = g.nodes();
 
   for (var _i3 = 0; _i3 < gNodeIds.length; _i3++) {
+    var _cy$getElementById$sc, _cy$getElementById$sc2;
+
     var id = gNodeIds[_i3];
     var n = g.node(id);
-    cy.getElementById(id).scratch().dagre = n;
+    (_cy$getElementById$sc2 = (_cy$getElementById$sc = cy.getElementById(id).scratch()).dagre) !== null && _cy$getElementById$sc2 !== void 0 ? _cy$getElementById$sc2 : _cy$getElementById$sc.dagre = n;
   }
 
   var dagreBB;
