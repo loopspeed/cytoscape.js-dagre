@@ -109,7 +109,7 @@ DagreLayout.prototype.run = function(){
     let id = gNodeIds[i];
     let n = g.node( id );
 
-    cy.getElementById(id).scratch().dagre = n;
+    cy.getElementById(id).scratch().dagre ??= n;
   }
 
   let dagreBB;
