@@ -1,4 +1,4 @@
-const isFunction = function(o) {
+const isFunction = function (o) {
   return typeof o === "function";
 };
 const defaults = require("./defaults");
@@ -12,14 +12,14 @@ function DagreLayout(options) {
 }
 
 // runs the layout
-DagreLayout.prototype.run = function() {
+DagreLayout.prototype.run = function () {
   let options = this.options;
   let layout = this;
 
   let cy = options.cy; // cy is automatically populated for us in the constructor
   let eles = options.eles;
 
-  let getVal = function(ele, val) {
+  let getVal = function (ele, val) {
     return isFunction(val) ? val.apply(ele, [ele]) : val;
   };
 
@@ -48,7 +48,7 @@ DagreLayout.prototype.run = function() {
   });
 
   let gObj = {};
-  let setGObj = function(name, val) {
+  let setGObj = function (name, val) {
     if (val != null) {
       gObj[name] = val;
     }
@@ -64,10 +64,10 @@ DagreLayout.prototype.run = function() {
 
   g.setGraph(gObj);
 
-  g.setDefaultEdgeLabel(function() {
+  g.setDefaultEdgeLabel(function () {
     return {};
   });
-  g.setDefaultNodeLabel(function() {
+  g.setDefaultNodeLabel(function () {
     return {};
   });
 
@@ -101,7 +101,7 @@ DagreLayout.prototype.run = function() {
   }
 
   // add edges to dagre
-  let edges = eles.edges().stdFilter(function(edge) {
+  let edges = eles.edges().stdFilter(function (edge) {
     return !edge.source().isParent() && !edge.target().isParent(); // dagre can't handle edges on compound nodes
   });
 
@@ -140,7 +140,7 @@ DagreLayout.prototype.run = function() {
 
   if (options.boundingBox) {
     dagreBB = { x1: Infinity, x2: -Infinity, y1: Infinity, y2: -Infinity };
-    nodes.forEach(function(node) {
+    nodes.forEach(function (node) {
       let dModel = node.scratch().dagre;
 
       dagreBB.x1 = Math.min(dagreBB.x1, dModel.x);
@@ -156,7 +156,7 @@ DagreLayout.prototype.run = function() {
     dagreBB = bb;
   }
 
-  let constrainPos = function(p) {
+  let constrainPos = function (p) {
     if (options.boundingBox) {
       let xPct = dagreBB.w === 0 ? 0 : (p.x - dagreBB.x1) / dagreBB.w;
       let yPct = dagreBB.h === 0 ? 0 : (p.y - dagreBB.y1) / dagreBB.h;
@@ -170,9 +170,9 @@ DagreLayout.prototype.run = function() {
     }
   };
 
-  nodes.layoutPositions(layout, options, function(ele) {
+  nodes.layoutPositions(layout, options, function (ele) {
     ele = typeof ele === "object" ? ele : this;
-    if (ele.scratch().position) return ele.scratch().position;
+    if (ele.data().position) return ele.data().position;
 
     let dModel = ele.scratch().dagre;
     return constrainPos({
