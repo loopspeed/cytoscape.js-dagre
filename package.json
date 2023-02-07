@@ -1,6 +1,6 @@
 {
   "name": "@loopspeed/cytoscape-dagre",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "The Dagre layout for DAGs and trees for Cytoscape.js",
   "main": "@loopspeed/cytoscape-dagre.js",
   "author": {
