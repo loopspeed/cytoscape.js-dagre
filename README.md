@@ -91,6 +91,7 @@ var defaults = {
   // defining the topology of a graph, this sort function can help ensure the correct order of the nodes/edges.
   // this feature is most useful when adding and removing the same nodes and edges multiple times in a graph.
   stop: function() {}, // on layoutstop
+  centerId: undefined, // The id of the node to center the view on
 };
 ```
 
